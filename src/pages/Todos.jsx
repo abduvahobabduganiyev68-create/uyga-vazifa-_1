@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Todos() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-      .then((res) => res.json())
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => response.json())
       .then((data) => {
         setTodos(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Xatolik yuz berdi:", err);
+      .catch((error) => {
+        console.error("Xatolik:", error);
         setLoading(false);
       });
   }, []);
@@ -22,12 +22,12 @@ function Todos() {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Barcha Todolar</h2>
+    <div>
+      <h2>200 ta Todo ro'yxati</h2>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-            {todo.title}
+          <li key={todo.id}>
+            <a href={`#todo-${todo.id}`}>{todo.title}</a>
           </li>
         ))}
       </ul>
